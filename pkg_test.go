@@ -10,7 +10,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	. "github.com/pappz/trans-socket/transsocket/test_helper"
+	. "github.com/pappz/trans-socket/test_helper"
 )
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -20,7 +20,7 @@ func Test_transferFdWithData(t *testing.T) {
 
 	sc, err := NewServerClient()
 	assert.NoError(t, err)
-	sampleMetaData := Meta{56}
+	sampleMetaData := Meta{DeviceId: 56}
 
 	err = checkReadWrite(sc)
 	assert.NoError(t, err)

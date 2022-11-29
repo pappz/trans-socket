@@ -2,10 +2,9 @@ package main
 
 import (
 	"bufio"
+	"github.com/pappz/trans-socket"
 	"log"
 	"net"
-
-	"github.com/pappz/trans-socket/transsocket"
 )
 
 func readData(c net.Conn) (string, error) {
