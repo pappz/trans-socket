@@ -30,6 +30,9 @@ func (s *Sender) Connect() error {
 }
 
 func (s *Sender) Disconnect() error {
+	if s.conn == nil {
+		return nil
+	}
 	return s.conn.Close()
 }
 

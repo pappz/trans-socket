@@ -26,6 +26,7 @@ func Test_transferFdWithData(t *testing.T) {
 	assert.NoError(t, err)
 
 	socketReceiver, err := NewReceiver(Size())
+	defer socketReceiver.Close()
 	assert.NoError(t, err)
 
 	wg.Add(1)
@@ -74,6 +75,7 @@ func Test_transferFd(t *testing.T) {
 	assert.NoError(t, err)
 
 	server, err := NewReceiver(Size())
+	defer server.Close()
 	assert.NoError(t, err)
 
 	wg.Add(1)
@@ -117,6 +119,7 @@ func Test_transferFullFilledBuffer(t *testing.T) {
 	assert.NoError(t, err)
 
 	server, err := NewReceiver(Size())
+	defer server.Close()
 	assert.NoError(t, err)
 
 	wg.Add(1)

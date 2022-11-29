@@ -19,6 +19,7 @@ type Receiver struct {
 
 // NewReceiver The new instance will listen on UDN
 func NewReceiver(buffSize int) (*Receiver, error) {
+	var err error
 	if buffSize <= 0 {
 		buffSize = 32
 	}
@@ -27,7 +28,8 @@ func NewReceiver(buffSize int) (*Receiver, error) {
 		buffSize: buffSize,
 	}
 
-	return s, s.listen()
+	s.listener, err = s.listen()
+	return s, err
 }
 
 func (r *Receiver) WaitForSender() error {
@@ -38,6 +40,13 @@ func (r *Receiver) WaitForSender() error {
 
 	r.conn = conn.(*net.UnixConn)
 	return nil
+}
+
+func (r *Receiver) Close() error {
+	if r.listener == nil {
+		return nil
+	}
+	return r.listener.Close()
 }
 
 func (r *Receiver) RecvFileDescriptor() ([]byte, net.Conn, error) {
@@ -76,13 +85,12 @@ func (r *Receiver) RecvFileDescriptor() ([]byte, net.Conn, error) {
 	return receivedData, conn, err
 }
 
-func (r *Receiver) listen() (err error) {
+func (r *Receiver) listen() (net.Listener, error) {
 	if err := os.RemoveAll(sockAddr); err != nil {
-		return err
+		return nil, err
 	}
 
-	r.listener, err = net.Listen("unix", sockAddr)
-	return
+	return net.Listen("unix", sockAddr)
 }
 
 func getDataFromBuffer(buf []byte, bufLen int) []byte {
