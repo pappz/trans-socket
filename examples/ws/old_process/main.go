@@ -59,6 +59,8 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // Listen and wait to ws connection. If it happens transfer the connection to the new process
+// For the test you can use the command below.
+// wscat --connect ws://127.0.0.1:1234
 func main() {
 	log.Print("Hello, I am the old process!")
 	http.HandleFunc("/", wsHandler)
