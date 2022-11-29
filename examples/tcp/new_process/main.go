@@ -2,15 +2,10 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"net"
 
 	"github.com/pappz/trans-scoket/transsocket"
-)
-
-var (
-	onReceived = make(chan bool)
 )
 
 func readData(c net.Conn) (string, error) {
@@ -20,27 +15,27 @@ func readData(c net.Conn) (string, error) {
 }
 
 func onReceivedClient(conn net.Conn) {
-	fmt.Println("on new connection")
 	for {
 		s, err := readData(conn)
 		if err != nil {
-			log.Printf("%v", err)
+			log.Printf("read err: %s", err.Error())
 			break
 		}
 
 		log.Printf("msg from client: %s", s)
 	}
-	onReceived <- true
 }
 
 func main() {
-	fmt.Println("hello I am the new process!")
+	log.Println("hello I am the new process!")
 
 	s, err := transsocket.NewReceiver(0)
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer s.Close()
 
+	log.Println("wait for transocket service connection")
 	if err := s.WaitForSender(); err != nil {
 		log.Fatal(err)
 	}
@@ -49,7 +44,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("on new connection")
 	onReceivedClient(fd)
-
-	<-onReceived
 }
