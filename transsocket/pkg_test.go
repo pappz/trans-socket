@@ -10,7 +10,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	. "github.com/pappz/trans-scoket/transsocket/test_helper"
+	. "github.com/pappz/trans-socket/transsocket/test_helper"
 )
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

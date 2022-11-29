@@ -6,7 +6,7 @@ import (
 
 	"github.com/webkeydev/websocket"
 
-	"github.com/pappz/trans-scoket/transsocket"
+	"github.com/pappz/trans-socket/transsocket"
 )
 
 var (

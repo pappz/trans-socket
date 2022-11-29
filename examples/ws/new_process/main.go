@@ -6,8 +6,8 @@ import (
 
 	"github.com/webkeydev/websocket"
 
-	"github.com/pappz/trans-scoket/examples/ws/generator"
-	"github.com/pappz/trans-scoket/transsocket"
+	"github.com/pappz/trans-socket/examples/ws/generator"
+	"github.com/pappz/trans-socket/transsocket"
 )
 
 func fdToWsConn(conn net.Conn) (*websocket.Conn, error) {

@@ -1,4 +1,4 @@
-module github.com/pappz/trans-scoket
+module github.com/pappz/trans-socket
 
 go 1.18
 

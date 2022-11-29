@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/pappz/trans-scoket/transsocket"
+	"github.com/pappz/trans-socket/transsocket"
 )
 
 func readData(c net.Conn) (string, error) {
